@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=dev node distBackend/api/server.js",
-    "start": "NODE_ENV=pro node distBackend/api/server.js",
+    "start": "NODE_ENV=prod node distBackend/api/server.js",
     "build": "tsc"
   },
   "keywords": [],
@@ -24,7 +24,6 @@
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.7.0",
-    "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
     "tsyringe": "^4.6.0",
     "uuid": "^8.3.2",
@@ -38,6 +37,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.3",
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^8.3.4",
+    "morgan": "^1.10.0"
   }
 }
