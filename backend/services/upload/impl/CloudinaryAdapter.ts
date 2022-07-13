@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
+import { DEFAULT_PATH } from '../constants';
 
 import { IUploadImage } from '../IUploadImage';
 
@@ -18,7 +19,7 @@ export class CloudinaryAdapter implements IUploadImage {
 		return await this.update(newPath);
 	}
 
-	private async delete(path: string = ''): Promise<boolean> {
+	private async delete(path: string = DEFAULT_PATH): Promise<boolean> {
 		const dataPath = path.split('/'),
 			nameWhithExtension = dataPath[dataPath.length - 1],
 			[id] = nameWhithExtension.split('.');

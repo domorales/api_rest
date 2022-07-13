@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { v4 } from 'uuid';
 
+import { DEFAULT_COLLECTION, DEFAULT_EXTENSIONS_IMG, DEFAULT_NAME_IMAGE } from './constants';
 import FIleExtensionException from './exception/FileExtensionException';
 import NotSendFileException from './exception/NotSendFIleExecption';
 import UploadException from './exception/UploadException';
@@ -10,8 +11,8 @@ import URL from './type/URL';
 
 const uploadFile = async (
 	file: UploadedFile,
-	extensions: String[] = ['jpeg', 'jpg', 'png'],
-	folder: string
+	folder: string,
+	extensions: string[] = DEFAULT_EXTENSIONS_IMG
 ): Promise<URL> => {
 	try {
 		const nameCut = file.name.split('.'),
@@ -30,7 +31,7 @@ const uploadFile = async (
 		if (error instanceof Error) throw new UploadException(error.message);
 	}
 };
-const validateUploadFile = async (files: FileArray): Promise<void> => {
+const validateUploadFile = (files: FileArray): void => {
 	const notExistsFiles = !files || Object.keys(files).length === 0,
 		file = <UploadedFile>files.archivo;
 	if (notExistsFiles || !file) throw new NotSendFileException('No existe archivo que subir');
@@ -45,7 +46,10 @@ const existsPathImg = (path: string) => {
 	return fs.existsSync(path);
 };
 
-const concatPath = (image: string = '', collection: string = '') => {
+const concatPath = (
+	image: string = DEFAULT_NAME_IMAGE,
+	collection: string = DEFAULT_COLLECTION
+) => {
 	return path.join(__dirname, '/uploads/', collection, image);
 };
 

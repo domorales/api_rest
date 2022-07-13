@@ -1,8 +1,7 @@
 import { FileArray, UploadedFile } from 'express-fileupload';
 
+import { MAX_NUMBER_FILE } from './constants';
 import NotSendFileException from './exception/NotSendFIleExecption';
-
-const MAX_NUMBER_FILE = 1;
 
 const pathTmp = (files: FileArray): string => {
 	const isFile = files && Object.keys(files).length === MAX_NUMBER_FILE,
