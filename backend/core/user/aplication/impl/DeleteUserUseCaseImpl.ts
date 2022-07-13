@@ -7,6 +7,6 @@ import { DeleteUserUseCase } from '../useCases';
 export default class DeleteUserUseCaseImpl implements DeleteUserUseCase {
 	constructor(@inject('UserRepository') private repository: IUserResposotory) {}
 	async execute(id: string): Promise<void> {
-		const user = await this.repository.delete(id);
+		await this.repository.delete(id);
 	}
 }
