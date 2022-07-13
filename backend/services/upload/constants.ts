@@ -1,4 +1,4 @@
-const MAX_NUMBER_FILE: number = 1,
+const MAX_NUMBER_FILE = 1,
 	DEFAULT_EXTENSIONS_IMG: string[] = ['jpeg', 'jpg', 'png'],
 	DEFAULT_COLLECTION = '',
 	DEFAULT_NAME_IMAGE = '',

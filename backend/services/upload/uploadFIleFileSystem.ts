@@ -36,7 +36,10 @@ const validateUploadFile = (files: FileArray): void => {
 		file = <UploadedFile>files.archivo;
 	if (notExistsFiles || !file) throw new NotSendFileException('No existe archivo que subir');
 };
-const deleteUploadFile = (image: string = '', collection: string = '') => {
+const deleteUploadFile = (
+	image: string = DEFAULT_NAME_IMAGE,
+	collection: string = DEFAULT_COLLECTION
+) => {
 	const path = concatPath(image, collection);
 	if (existsPathImg(path)) {
 		fs.unlinkSync(path);
