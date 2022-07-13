@@ -1,7 +1,7 @@
 import { inject, singleton } from 'tsyringe';
 
 import Category from '../../domain/Category';
-import ICategoryRepository from '../../domain/port/ICategoryRespository';
+import ICategoryRepository from '../../domain/port/ICategoryRepository';
 import { UpdateCategoryUseCase } from '../useCases';
 
 @singleton()

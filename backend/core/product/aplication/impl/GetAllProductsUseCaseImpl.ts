@@ -7,7 +7,7 @@ import { GetAllProductsUseCase } from '../useCases';
 @singleton()
 export default class GetAllProductsUseCaseImpl implements GetAllProductsUseCase {
 	constructor(@inject('ProductRepository') private repository: IProductRepository) {}
-	public async execute(limit: number = 5): Promise<Product[]> {
+	public async execute(limit: number): Promise<Product[]> {
 		return await this.repository.getAll(limit);
 	}
 }

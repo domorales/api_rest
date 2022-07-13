@@ -1,5 +1,5 @@
 import Category from '../../../core/category/domain/Category';
-import ICategoryRepository from '../../../core/category/domain/port/ICategoryRespository';
+import ICategoryRepository from '../../../core/category/domain/port/ICategoryRepository';
 import { Optional } from '../../../core/shared/types/Optional';
 import { CategoryModel } from '../entities/category';
 import {
@@ -9,14 +9,17 @@ import {
 	toDomainCategoryEntityPopulate,
 } from '../mappers/categoryMapper';
 
-export default class CategoryRepositoy implements ICategoryRepository {
+export default class CategoryRepository implements ICategoryRepository {
+	private static readonly DEFAULT_NUMBER_GET_CATEGORIES = 5;
 	async create(category: Category): Promise<Optional<Category>> {
 		const document = new CategoryModel(toDBCreateEntity(category));
 		const categoryDB = await document.save();
 		return categoryDB ? toDomainCategoryEntity(categoryDB) : undefined;
 	}
 
-	async getAll(limit: number): Promise<{ total: number; categories: Category[] }> {
+	async getAll(
+		limit: number = CategoryRepository.DEFAULT_NUMBER_GET_CATEGORIES
+	): Promise<{ total: number; categories: Category[] }> {
 		const query = { state: true };
 		const result = await Promise.all([
 			CategoryModel.find(query).limit(limit).populate('user'),

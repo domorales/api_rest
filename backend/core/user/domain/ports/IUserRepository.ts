@@ -1,7 +1,7 @@
 import { Optional } from '../../../shared/types/Optional';
 import User from '../User';
 
-export default interface IUserResposotory {
+export default interface IUserRepository {
 	getByID(id: string): Promise<Optional<User>>;
 	getByEmail(email: string): Promise<Optional<User>>;
 	getAll(limit: number): Promise<{ total: number; users: User[] }>;

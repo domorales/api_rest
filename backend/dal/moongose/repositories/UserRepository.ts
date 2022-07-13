@@ -1,19 +1,22 @@
 import { singleton } from 'tsyringe';
 
 import { Optional } from '../../../core/shared/types/Optional';
-import IUserResposotory from '../../../core/user/domain/ports/IUserRepository';
+import IUserRepository from '../../../core/user/domain/ports/IUserRepository';
 import User from '../../../core/user/domain/User';
 import { UserModel } from '../entities/user';
 import { toDBEntity, toDomainUserEntity } from '../mappers/userMapper';
 
 @singleton()
-export default class UserRepositoy implements IUserResposotory {
+export default class UserRepository implements IUserRepository {
+	private static readonly DEFAULT_NUMBER_GET_USERS = 5;
 	async getByID(id: string): Promise<Optional<User>> {
 		const result = await UserModel.findOne({ _id: id, state: true });
 		return result ? toDomainUserEntity(result) : undefined;
 	}
 
-	async getAll(limit: number = 5): Promise<{ total: number; users: User[] }> {
+	async getAll(
+		limit: number = UserRepository.DEFAULT_NUMBER_GET_USERS
+	): Promise<{ total: number; users: User[] }> {
 		const query = { state: true };
 		const result = await Promise.all([
 			UserModel.find(query).limit(limit),

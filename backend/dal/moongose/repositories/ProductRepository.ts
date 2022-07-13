@@ -10,6 +10,8 @@ import {
 } from '../mappers/productMapper';
 
 export default class ProductRepository implements IProductRepository {
+	private static readonly DEFAULT_NUMBER_GET_PRODUCTS = 5;
+
 	async getByID(id: string): Promise<Optional<Product>> {
 		const product = await ProductModel.findOne({ _id: id, state: true });
 		return product ? toDomainProductEntity(product) : undefined;
@@ -21,7 +23,9 @@ export default class ProductRepository implements IProductRepository {
 		]);
 		return product ? toDomainProductEntityPopulate(product) : undefined;
 	}
-	async getAll(limit: number): Promise<Product[]> {
+	async getAll(
+		limit: number = ProductRepository.DEFAULT_NUMBER_GET_PRODUCTS
+	): Promise<Product[]> {
 		const productsDB = await ProductModel.find({ state: true })
 			.limit(limit)
 			.populate(['user', 'category']);
