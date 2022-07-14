@@ -79,7 +79,7 @@ export default class ProductController {
 			const { id } = req.params,
 				files = req.files;
 
-			const patTmp = await pathTmp(files);
+			const patTmp = pathTmp(files);
 			await this.upadateImageProductUseCase.execute(id, patTmp);
 			res.json({ message: 'SUBIO CON EXITO' });
 		} catch (error) {

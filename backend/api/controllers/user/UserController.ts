@@ -77,7 +77,7 @@ export default class UserController {
 		try {
 			const { id } = req.params;
 			const files = req.files;
-			const patTmp = await pathTmp(files);
+			const patTmp = pathTmp(files);
 			await this.updateImageUseCase.execute(id, patTmp);
 			return res.status(200).json({ message: 'EXITO AL SUBIR IMAGEN' });
 		} catch (error) {
